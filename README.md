@@ -1,33 +1,73 @@
- 
-# Sentiment AI — Short Overview
+# Sentiment Analysis Project
 
-What this project does
-- Downloads Amazon food reviews, cleans the text, and trains a simple sentiment model (positive / neutral / negative).
-- Provides a small web API to send a review and receive a predicted sentiment and confidence.
+This project builds a sentiment analysis pipeline for Amazon food reviews.
+It preprocesses review text, trains a TF-IDF + Logistic Regression model, and serves predictions with a Flask API.
 
-Quick, non-technical steps
-1) Get the data
-- We use a public Kaggle dataset. If you have Kaggle set up, download the dataset into the `data/` folder and unzip it.
+## Dataset
 
-2) Preprocess the data
-- Run the provided preprocessing step to clean text and create a processed CSV.
+Source: Kaggle, Amazon Fine Food Reviews
 
-3) Train the model
-- Run the training script to produce model files in the `models/` folder.
+## Setup
 
-4) Run the API
-- Start the small web service and POST a piece of text to get a sentiment back.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-How to test quickly
-- There are helper scripts and a Makefile so you can run the above steps with minimal typing. See the project root for `make preprocess`, `make docker-build`, and `make docker-run`.
+## Run
 
-Notes for non-developers
-- If you prefer not to run anything locally, tell me and I can (a) package the model and a short demo, or (b) show screenshots of sample outputs.
-- If you need help with any step (installing Docker, running the API, or downloading the data), tell me which OS and I will give exact one-line instructions.
+### 1. Preprocess
 
-Files to look at
-- `api/app.py` — web API
-- `src/preprocessing/clean_text.py` — data cleaning
-- `src/models/train.py` — training and evaluation
+```bash
+python src/preprocessing/clean_text.py
+```
 
-Want this as a short slide or a one-paragraph email to a colleague? I can write that next.
+### 2. Train
+
+```bash
+python src/models/train.py
+```
+
+### 3. Predict
+
+```bash
+python src/models/predict.py "This product is really good"
+```
+
+### 4. Run API
+
+```bash
+python api/app.py
+```
+
+## API Request
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text":"This product is really good"}'
+```
+
+## Project Structure
+
+```text
+sentiment-ai-project/
+├── api/
+│   └── app.py
+├── data/
+├── models/
+├── scripts/
+├── src/
+│   ├── models/
+│   │   ├── predict.py
+│   │   └── train.py
+│   └── preprocessing/
+│       └── clean_text.py
+├── utils/
+│   └── text_cleaning.py
+├── Dockerfile
+├── Makefile
+├── requirements.txt
+└── README.md
+```

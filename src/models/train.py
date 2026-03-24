@@ -1,10 +1,17 @@
 import os
+import sys
 import joblib
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from utils.text_cleaning import clean_text
 
 
 def find_processed_csv(base_dir="data"):
@@ -50,7 +57,7 @@ def main():
 
     # ensure no missing values for training
     df = df.dropna(subset=["Text", "sentiment"]).copy()
-    X = df["Text"].astype(str)
+    X = df["Text"].astype(str).apply(clean_text)
     y = df["sentiment"].astype(str)
 
     X_train, X_test, y_train, y_test = train_test_split(

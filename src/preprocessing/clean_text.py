@@ -1,6 +1,12 @@
 import os
-import re
+import sys
 import pandas as pd
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from utils.text_cleaning import clean_text
 
 
 def find_reviews_csv(base_dir="data"):
@@ -36,21 +42,6 @@ def find_reviews_csv(base_dir="data"):
 
     return None
 
-
-def clean_text(text: str) -> str:
-    """Simple cleaning: lowercase, remove non-letters, collapse spaces.
-
-    Returns the cleaned string, or empty string if input is missing.
-    """
-    if pd.isna(text):
-        return ""
-    s = str(text).lower()
-    # keep letters and spaces only
-    s = re.sub(r"[^a-z\s]", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
-
-
 def main():
     """Load Reviews.csv, keep Text/Score, map scores to sentiment, clean text, save CSV."""
     csv_path = find_reviews_csv("data")
@@ -81,53 +72,6 @@ def main():
     print("First 5 rows:\n")
     print(df.head(5).to_string(index=False))
     print("\nClass counts:\n")
-    print(df["sentiment"].value_counts())
-
-
-if __name__ == "__main__":
-    main()
-import pandas as pd
-import re
-import string
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_PATH = BASE_DIR / "data" / "Reviews.csv"
-OUTPUT_PATH = BASE_DIR / "data" / "processed_reviews.csv"
-
-
-def score_to_sentiment(score):
-    if score in [1, 2]:
-        return "negative"
-    elif score == 3:
-        return "neutral"
-    else:
-        return "positive"
-
-
-def clean_text(text):
-    text = str(text).lower()
-    text = re.sub(r"\d+", "", text)
-    text = text.translate(str.maketrans("", "", string.punctuation))
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
-
-
-def main():
-    df = pd.read_csv(DATA_PATH)
-
-    df = df[["Text", "Score"]].copy()
-    df = df.dropna()
-
-    df["sentiment"] = df["Score"].apply(score_to_sentiment)
-    df["clean_text"] = df["Text"].apply(clean_text)
-
-    df = df[df["clean_text"].str.len() > 0]
-
-    df.to_csv(OUTPUT_PATH, index=False)
-
-    print(df[["clean_text", "sentiment"]].head())
-    print("\nClass distribution:")
     print(df["sentiment"].value_counts())
 
 

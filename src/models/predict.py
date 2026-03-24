@@ -1,20 +1,12 @@
 import os
-import re
 import sys
 import joblib
 
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
-def clean_text(text: str) -> str:
-    """Basic text cleaner used for prediction.
-
-    Lowercases, removes non-letters, and collapses whitespace.
-    """
-    if text is None:
-        return ""
-    s = str(text).lower()
-    s = re.sub(r"[^a-z\s]", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
+from utils.text_cleaning import clean_text
 
 
 def find_models_dir():

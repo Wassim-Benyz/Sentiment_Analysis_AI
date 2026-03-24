@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+
+# Generated outputs
+results.txt
+models/*.joblib
+
+# Notebook and local cache artifacts
+.ipynb_checkpoints/
+
+data/

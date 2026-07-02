@@ -1,7 +1,7 @@
 # Sentiment Analysis Project
 
-This project builds a sentiment analysis pipeline for Amazon food reviews.
-It preprocesses review text, trains a TF-IDF + Logistic Regression model, and serves predictions with a Flask API.
+The project aims to develop a sentiment analysis pipeline on Amazon food reviews.
+The pipeline involves preprocessing the textual data, comparing various machine learning models on TF-IDF features, and making predictions via Flask API.
 
 ## Dataset
 
@@ -23,7 +23,9 @@ pip install -r requirements.txt
 python src/preprocessing/clean_text.py
 ```
 
-### 2. Train
+### 2. Train and Compare Models
+
+This code trains and evaluates all implemented machine learning models and then saves the best performing model.
 
 ```bash
 python src/models/train.py
@@ -57,6 +59,7 @@ sentiment-ai-project/
 │   └── app.py
 ├── data/
 ├── models/
+├── evaluation/
 ├── scripts/
 ├── src/
 │   ├── models/

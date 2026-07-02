@@ -1,0 +1,39 @@
+Error Analysis
+==============
+
+Total number of misclassified samples: 9701
+
+Number of mistakes for each true class:
+- negative: 2956
+- neutral: 4582
+- positive: 2163
+
+Five representative misclassified examples:
+
+Example 1
+Original Review: i really like the donut shop coffe so i tried this one it is not nearly as bold which is what i like it does have a good flavor tho i have found that costco sells this and several others for only count
+True Label: neutral
+Predicted Label: positive
+
+Example 2
+Original Review: while the price for the ryvita was cheaper than anywhere i could buy it in a store locally i d caution other buyers from getting more than one case at a time my order arrived recently with no problems but the sell by date is august it seems these were sitting around somewhere and the reason they are less expensive is the shelf life is short
+True Label: negative
+Predicted Label: positive
+
+Example 3
+Original Review: it is tasty like coffee mate which i actually like but i m afraid it s far less nutritious than soy milk or milk serving g powder has calories but only contains g of protein g of non fat milk powder contains g protein and the list of ingredients for this product is long with several long words br br i will keep it but only as coffee creamer to be fair it is probably healthier than regular coffee creamer buti don t think it is as natural healthy and nutritious as soy milk
+True Label: negative
+Predicted Label: neutral
+
+Example 4
+Original Review: i have young labs who really enjoyed these chews but the long lasting is a little deceiving i thought it would take days for them to soften the chew and get little pieces off it but they didn t last more than hours while i would purchase this item again as a special treat they are a little expensive for all the longer they lasted with my dogs i would not recommend this for aggressive chewers
+True Label: positive
+Predicted Label: negative
+
+Example 5
+Original Review: i like the other jerky products i have tried from golden valley very much but the sweet n spicy buffalo jerky is a bit too hot for my taste i thought sweet and spicy meant medium hot since it wasn t called sweet and hot this jerky is hot it is hard to appreciate the jerky or the sweetness of it if your mouth is burning actually it is not burning red hot but is a little too hot for someone who likes spicy to be a little less than medium on the hotness scale the jerky itself is wonderful just the right amount of tenderness and chewiness if you like a little less than medium hotness then try a different flavor of their jerky they re great
+True Label: neutral
+Predicted Label: positive
+
+Automatically generated summary:
+The most frequent confusions were neutral reviews predicted as positive (3032 cases); negative reviews predicted as positive (2175 cases); neutral reviews predicted as negative (1550 cases).
